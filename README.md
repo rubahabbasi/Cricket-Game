@@ -15,6 +15,5 @@ An interactive, browser-based Cricket Game built with pure JavaScript, HTML5, an
 
 ## 🚀 How to Play
 1. Clone the repository:
-   ```bash
-   git clone [https://github.com/rubahabbasi/Cricket-Game.git](https://github.com/rubahabbasi/Cricket-Game.git)
+   ```bashgit clone [https://github.com/rubahabbasi/Cricket-Game.git](https://github.com/rubahabbasi/Cricket-Game.git)
    
