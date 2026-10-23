@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXON // 3D Architect & AI Full-Stack Portfolio</title>
+  <meta name="description" content="Hyper-immersive 3D interactive portfolio for a hybrid 3D Architect & AI Full-Stack Web Developer.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Project Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom Magnetic Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Cinematic Architectural Preloader -->
+  <div id="preloader">
+    <div class="preloader-grid">
+      <div class="preloader-scan"></div>
+    </div>
+    <div class="preloader-title">// INITIALIZING SPATIAL ENGINE</div>
+    <div class="preloader-counter" id="preloaderCount">00%</div>
+    <div class="preloader-sub">COMPILING PARAMETRIC SHADERS & NEURAL NODES</div>
+  </div>
+
+  <!-- Architectural HUD Telemetry Overlays (Fixed in Viewport Corners) -->
+  <div class="hud-telemetry hud-top-left">
+    <div>CAM_POS: <span id="hudCamPos">[X: 0.0, Y: 1.2, Z: 5.0]</span></div>
+    <div>FOV: 55° // LENS: 35MM TILT-SHIFT</div>
+  </div>
+
+  <div class="hud-telemetry hud-top-right">
+    <div><span class="hud-pill"><span class="pulse-dot"></span> RENDER_ENGINE: WEBGL_2.0</span></div>
+    <div style="margin-top: 4px;"><span class="hud-pill"><span class="pulse-dot gold"></span> AI_AGENT: ONLINE</span></div>
+  </div>
+
+  <div class="hud-telemetry hud-bottom-left">
+    <div>FPS: <span id="hudFps">60</span></div>
+    <div>DRAW_CALLS: <span id="hudDrawCalls">38</span></div>
+    <div>VERTICES: 1.4M</div>
+  </div>
+
+  <div class="hud-telemetry hud-bottom-right">
+    <div>SPATIAL_INDEX: ACTIVE</div>
+    <div>COORDINATE_SYS: EPSG:4978</div>
+  </div>
+
+  <!-- Floating Glass Dock Navbar -->
+  <header class="nav-dock-container">
+    <nav class="nav-dock">
+      <a href="#hero" class="nav-brand magnetic">
+        <span class="brand-dot"></span>
+        <span>AXON<span class="text-gold">.</span>AI</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#showcase" class="magnetic">Works</a></li>
+        <li><a href="#matrix" class="magnetic">Matrix</a></li>
+        <li><a href="#commission" class="magnetic">Commission</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Render / Blueprint Mode Switcher -->
+        <button class="btn-toggle-mode magnetic" id="btnModeToggle" title="Toggle Blueprint / Wireframe Mode">
+          <i class="fa-solid fa-cube"></i>
+          <span id="modeToggleLabel">BLUEPRINT MODE</span>
+        </button>
+
+        <!-- AI Assistant Command Palette Trigger -->
+        <button class="btn-terminal magnetic" id="btnOpenTerminal" title="Open AI Command Terminal (Cmd/Ctrl + K)">
+          <i class="fa-solid fa-terminal"></i>
+          <span>⌘K</span>
+        </button>
+
+        <!-- Studio CMS Trigger -->
+        <button class="btn-studio magnetic" id="btnOpenStudio" title="Add Project Studio CMS (Shift + A)">
+          <i class="fa-solid fa-plus"></i>
+          <span>Studio</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 1. HERO SECTION -->
+  <section class="hero-section" id="hero">
+    <!-- Three.js 3D Interactive Canvas -->
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay-grid"></div>
+
+    <div class="hero-content">
+      <div class="hero-text-block">
+        <div class="hero-tag">
+          <i class="fa-solid fa-draw-polygon"></i>
+          <span>SPATIAL INTELLIGENCE & PARAMETRIC ARCHITECTURE</span>
+        </div>
+
+        <h1 class="hero-title">
+          Designing <span class="text-gold">Physical Spaces</span> &amp; <span class="text-cyan">Intelligent</span> Digital Worlds
+        </h1>
+
+        <p class="hero-desc">
+          Synthesizing avant-garde architectural geometry with autonomous AI systems, WebGL spatial computing, and high-performance full-stack web architectures.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#showcase" class="btn-primary magnetic">
+            <i class="fa-solid fa-compass"></i>
+            <span>Explore 3D Corridor</span>
+          </a>
+          <button class="btn-secondary magnetic" id="btnHeroTerminal">
+            <i class="fa-solid fa-robot"></i>
+            <span>Consult AI Architect</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Visual 3D Tilt Card -->
+      <div class="hero-visual-card magnetic-card">
+        <div class="card-spotlight"></div>
+        <div class="hero-img-card">
+          <img src="Gemini_Generated_Image_tdd8iutdd898798.jpg" alt="Parametric Pavilion and AI Streams">
+        </div>
+        <div class="hero-card-meta">
+          <div>
+            <div class="meta-sub">// FEATURED SPATIAL ARTIFACT</div>
+            <div class="meta-title">The Neural Pavilion</div>
+          </div>
+          <span class="badge-3d">OCTANE 8K</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SELECTED WORKS SHOWCASE -->
+  <section class="section-wrapper" id="showcase">
+    <div class="section-header">
+      <div>
+        <span class="section-label">// SELECTED WORKS &amp; ARTIFACTS</span>
+        <h2 class="section-title">Spatial Architecture &amp; AI Systems</h2>
+      </div>
+
+      <div class="showcase-controls">
+        <!-- Category Filters -->
+        <div class="filter-group" id="categoryFilters">
+          <button class="filter-btn active magnetic" data-cat="all">All (4)</button>
+          <button class="filter-btn magnetic" data-cat="3D Architecture">3D Architecture</button>
+          <button class="filter-btn magnetic" data-cat="AI Web App">AI Web Apps</button>
+          <button class="filter-btn magnetic" data-cat="Digital Twin">Digital Twins</button>
+          <button class="filter-btn magnetic" data-cat="WebGL / Spatial">Spatial WebGL</button>
+        </div>
+
+        <!-- View Switcher: Bento vs 3D Corridor -->
+        <div class="view-switcher">
+          <button class="view-btn active magnetic" id="btnViewBento" title="Bento Grid Layout">
+            <i class="fa-solid fa-table-cells-large"></i> Bento
+          </button>
+          <button class="view-btn magnetic" id="btnViewCorridor" title="3D Spatial Fly-Through Corridor">
+            <i class="fa-solid fa-cube"></i> 3D Corridor
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View A: Bento Grid Architect View -->
+    <div class="bento-grid" id="bentoContainer">
+      <!-- Injected dynamically from projectsData.js -->
+    </div>
+
+    <!-- View B: 3D Spatial Corridor View -->
+    <div class="corridor-view-container" id="corridorContainer">
+      <div class="corridor-track" id="corridorTrack">
+        <!-- Monolith cards rendered in 3D Z-space -->
+      </div>
+      <div class="corridor-hint">
+        <i class="fa-solid fa-arrows-up-down"></i> Scroll viewport to fly through Z-Space corridor
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DUAL-DISCIPLINE SKILL MATRIX -->
+  <section class="section-wrapper" id="matrix">
+    <div class="section-header">
+      <div>
+        <span class="section-label">// COGNITIVE &amp; TECHNICAL ARCHITECTURE</span>
+        <h2 class="section-title">The Dual-Discipline Matrix</h2>
+      </div>
+    </div>
+
+    <div class="matrix-container">
+      <div class="matrix-divider">
+        <div class="matrix-divider-icon"><i class="fa-solid fa-bolt"></i></div>
+      </div>
+
+      <!-- Left Brain: 3D Architecture & Computational Design -->
+      <div class="matrix-column left-arch">
+        <div class="matrix-col-header">
+          <span class="matrix-eyebrow">// PHYSICAL &amp; PARAMETRIC DESIGN</span>
+          <h3 class="matrix-title">Left Brain: 3D Architecture</h3>
+        </div>
+
+        <div class="skill-list">
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Rhino 8 &amp; Algorithmic Grasshopper</span>
+              <span class="skill-percentage">98%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="98%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Blender 4.2 Geometry Nodes &amp; Shading</span>
+              <span class="skill-percentage">95%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="95%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Unreal Engine 5.4 Nanite &amp; Lumen</span>
+              <span class="skill-percentage">92%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="92%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">V-Ray 6 / Octane Photoreal Rendering</span>
+              <span class="skill-percentage">94%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="94%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Structural Analysis &amp; Solar Optimization</span>
+              <span class="skill-percentage">90%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="90%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Brain: AI & Full-Stack WebGL -->
+      <div class="matrix-column right-ai">
+        <div class="matrix-col-header">
+          <span class="matrix-eyebrow">// DIGITAL &amp; NEURAL SYSTEMS</span>
+          <h3 class="matrix-title">Right Brain: AI &amp; WebGL Dev</h3>
+        </div>
+
+        <div class="skill-list">
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Three.js / React Three Fiber / WebGPU</span>
+              <span class="skill-percentage">96%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="96%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Next.js 15, TypeScript, Tailwind CSS</span>
+              <span class="skill-percentage">95%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="95%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Python FastAPI, PyTorch &amp; LLM Fine-Tuning</span>
+              <span class="skill-percentage">91%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="91%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Custom GLSL Shaders &amp; Particle Physics</span>
+              <span class="skill-percentage">93%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="93%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Digital Twins, IoT WebSockets &amp; GeoSpatial</span>
+              <span class="skill-percentage">89%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-progress="89%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. COMMISSION & PROJECT ESTIMATOR PORTAL -->
+  <section class="section-wrapper" id="commission">
+    <div class="section-header">
+      <div>
+        <span class="section-label">// COMMISSION &amp; COLLABORATION</span>
+        <h2 class="section-title">Interactive Project Estimator</h2>
+      </div>
+    </div>
+
+    <div class="commission-box">
+      <div class="commission-form">
+        <label class="form-group-label">1. SELECT REQUIRED CAPABILITIES</label>
+        <div class="service-selector-grid">
+          <div class="service-card selected magnetic" data-service="archviz" data-base="6500">
+            <i class="fa-solid fa-building" style="color:var(--accent-gold);margin-bottom:8px;font-size:1.2rem;"></i>
+            <div class="service-name">3D ArchViz &amp; BIM</div>
+          </div>
+          <div class="service-card selected magnetic" data-service="ai-web" data-base="8500">
+            <i class="fa-solid fa-brain" style="color:var(--accent-cyan);margin-bottom:8px;font-size:1.2rem;"></i>
+            <div class="service-name">AI Full-Stack App</div>
+          </div>
+          <div class="service-card magnetic" data-service="spatial" data-base="7500">
+            <i class="fa-solid fa-cubes" style="color:#a855f7;margin-bottom:8px;font-size:1.2rem;"></i>
+            <div class="service-name">Interactive WebGL</div>
+          </div>
+        </div>
+
+        <label class="form-group-label">2. ESTIMATED DELIVERY TIMELINE</label>
+        <div class="slider-container">
+          <input type="range" min="2" max="24" value="6" class="range-slider" id="timelineSlider">
+          <div class="slider-labels">
+            <span>2 Weeks (Sprint)</span>
+            <span id="sliderValueLabel" style="color:var(--accent-gold);font-weight:700;">6 Weeks (Standard)</span>
+            <span>24 Weeks (Flagship)</span>
+          </div>
+        </div>
+
+        <label class="form-group-label">3. CLIENT INQUIRY DETAILS</label>
+        <input type="text" class="input-field" placeholder="Your Name or Studio" id="inputClientName">
+        <input type="email" class="input-field" placeholder="Official Contact Email" id="inputClientEmail">
+        <textarea class="input-field" rows="3" placeholder="Project overview, architectural scale, or AI requirements..." id="inputClientMessage"></textarea>
+
+        <button class="btn-primary magnetic" id="btnSubmitCommission" style="width:100%;justify-content:center;">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Transmit Project Brief</span>
+        </button>
+      </div>
+
+      <!-- Estimator Real-Time Output Panel -->
+      <div class="estimator-summary-panel">
+        <div class="estimate-display">
+          <span class="section-label">// DYNAMIC ESTIMATE ENGINE</span>
+          <div class="estimate-val" id="estimatePriceVal">$15,000</div>
+          <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">
+            Includes full parametric 3D CAD modeling, custom WebGL/Three.js shaders, production React/Next.js frontend, and dedicated GPU AI node integration.
+          </p>
+
+          <div style="margin-top:20px;border-top:1px solid var(--glass-border);padding-top:16px;">
+            <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent-cyan);display:flex;justify-content:space-between;margin-bottom:8px;">
+              <span>DEPLOYMENT SPEED:</span>
+              <span id="summaryTimeline">6 WEEKS</span>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent-gold);display:flex;justify-content:space-between;">
+              <span>ARCHITECTURAL FIDELITY:</span>
+              <span>OCTANE / BIM READY</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:28px;">
+          <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);">
+            <i class="fa-solid fa-shield-halved"></i> 100% NDA Protected &bull; Architectural Precision Guarantee
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO CMS DRAWER (Zero-Code Scalability) -->
+  <div class="studio-drawer-backdrop" id="studioBackdrop"></div>
+  <aside class="studio-drawer" id="studioDrawer">
+    <div class="drawer-header">
+      <div>
+        <span class="section-label">// STUDIO CMS ENGINE</span>
+        <h3 class="drawer-title">+ Add Spatial Project</h3>
+      </div>
+      <button class="drawer-close magnetic" id="btnCloseStudio">&times;</button>
+    </div>
+
+    <form id="formAddProject">
+      <button type="button" class="btn-ai-prompt magnetic" id="btnGeneratePrompt">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>Generate Style-Locked AI Image Prompt</span>
+      </button>
+
+      <label class="form-group-label">PROJECT TITLE</label>
+      <input type="text" class="input-field" id="projTitle" required placeholder="e.g. Kinetic Helix Pavilion">
+
+      <label class="form-group-label">SUBTITLE / TAGLINE</label>
+      <input type="text" class="input-field" id="projSubtitle" required placeholder="e.g. Algorithmic Facade &amp; AI Node">
+
+      <label class="form-group-label">CATEGORY</label>
+      <select class="input-field" id="projCategory">
+        <option value="3D Architecture">3D Architecture</option>
+        <option value="AI Web App">AI Web App</option>
+        <option value="WebGL / Spatial">WebGL / Spatial</option>
+        <option value="Digital Twin">Digital Twin</option>
+      </select>
+
+      <label class="form-group-label">IMAGE ASSET (FILE OR URL)</label>
+      <input type="text" class="input-field" id="projImage" required placeholder="Gemini_Generated_Image_tdd8iutdd8.jpg or URL">
+
+      <label class="form-group-label">TECH STACK (COMMA SEPARATED)</label>
+      <input type="text" class="input-field" id="projTags" placeholder="Rhino, Grasshopper, Three.js, Python">
+
+      <label class="form-group-label">SPATIAL METRIC</label>
+      <input type="text" class="input-field" id="projMetric" placeholder="e.g. Polygon Count: 1.8M or Latency: 12ms">
+
+      <label class="form-group-label">PROJECT BRIEF &amp; SPECS</label>
+      <textarea class="input-field" id="projDesc" rows="3" placeholder="Architectural concept, structural calculations, and AI algorithms utilized..."></textarea>
+
+      <button type="submit" class="btn-primary magnetic" style="width:100%;justify-content:center;margin-top:10px;">
+        <i class="fa-solid fa-plus"></i>
+        <span>Publish to 3D Showcase</span>
+      </button>
+
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button type="button" class="btn-secondary magnetic" id="btnExportJSON" style="flex:1;justify-content:center;padding:10px;">
+          <i class="fa-solid fa-download"></i> Export JSON
+        </button>
+        <button type="button" class="btn-secondary magnetic" id="btnImportJSON" style="flex:1;justify-content:center;padding:10px;">
+          <i class="fa-solid fa-upload"></i> Import JSON
+        </button>
+        <input type="file" id="jsonFileInput" accept=".json" style="display:none;">
+      </div>
+    </form>
+  </aside>
+
+  <!-- AI COMMAND PALETTE MODAL (Cmd/Ctrl + K) -->
+  <div class="command-palette-modal" id="commandModal">
+    <div class="palette-box">
+      <div class="palette-input-wrap">
+        <i class="fa-solid fa-terminal" style="color:var(--accent-cyan);"></i>
+        <input type="text" class="palette-input" id="commandInput" placeholder="Ask AI Architect or type a command... (e.g. 'Show architecture', 'Blueprint')">
+        <span class="palette-badge">ESC</span>
+      </div>
+
+      <div class="palette-suggestions">
+        <div class="palette-item magnetic" data-cmd="show-arch">
+          <span><i class="fa-solid fa-building"></i> Show me your best 3D Architecture work</span>
+          <span class="palette-badge">Filter</span>
+        </div>
+        <div class="palette-item magnetic" data-cmd="blueprint">
+          <span><i class="fa-solid fa-cube"></i> Toggle Wireframe / Blueprint CAD Mode</span>
+          <span class="palette-badge">View</span>
+        </div>
+        <div class="palette-item magnetic" data-cmd="add-proj">
+          <span><i class="fa-solid fa-plus"></i> Open Studio CMS to add a project</span>
+          <span class="palette-badge">Studio</span>
+        </div>
+        <div class="palette-item magnetic" data-cmd="skills">
+          <span><i class="fa-solid fa-bolt"></i> Inspect Dual-Discipline Technical Matrix</span>
+          <span class="palette-badge">Skills</span>
+        </div>
+      </div>
+
+      <div class="palette-ai-response" id="paletteResponse">
+        <!-- AI Assistant responses populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT DETAIL INSPECTION MODAL -->
+  <div class="project-modal" id="projectModal">
+    <div class="modal-content-card">
+      <button class="modal-close-btn magnetic" id="btnCloseModal">&times;</button>
+      <div class="modal-img-container">
+        <img src="" alt="" class="modal-img" id="modalImage">
+      </div>
+      <div class="modal-body">
+        <span class="section-label" id="modalCategory">// CATEGORY</span>
+        <h2 class="card-title" id="modalTitle" style="font-size:2rem;margin:8px 0 16px;">Project Title</h2>
+        <p class="card-desc" id="modalDesc" style="font-size:1.05rem;margin-bottom:24px;line-height:1.7;">Description</p>
+        
+        <div style="margin-bottom:24px;">
+          <span class="form-group-label">TECHNICAL SPECIFICATIONS</span>
+          <div class="card-tags" id="modalTags"></div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--glass-border);padding-top:20px;">
+          <div class="card-metric" id="modalMetrics" style="font-size:0.9rem;">Metric</div>
+          <div style="display:flex;gap:12px;">
+            <a href="#" class="btn-secondary magnetic" id="modalDemoLink" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            <a href="#" class="btn-secondary magnetic" id="modalCodeLink" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External Libraries: Three.js r128, GSAP 3.12, ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Project Scripts -->
+  <script src="projectsData.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
